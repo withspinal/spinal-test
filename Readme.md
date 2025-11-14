@@ -29,7 +29,7 @@ From the sample contracts in the `/contracts` folder, extract **ALL** informatio
 
 For each extracted field, you must also capture the **bounding box coordinates** so the frontend can highlight where that information appears in the original document.
 PyMuPDF with tesseract OCR is probably your best combination to tackle this task. This combination allows both document extraction through OCR and PDF annotations.
----
+
 
 ## What's Already Set Up
 
