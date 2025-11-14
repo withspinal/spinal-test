@@ -1,0 +1,2 @@
+You are welcome to use any framework or are comfortable with. The Frontend code will NOT be looked at - we only care about the experience.
+The best library to use for the pdf handling is probably PDF.js - but again, this is up to you.
