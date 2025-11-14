@@ -1,0 +1,38 @@
+services:
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      args:
+        - DEBUG=true
+        - ENVIRONMENT=local
+    env_file:
+      - ${ENV_FILE:-./backend/.env}
+    ports:
+      - 8000:8000
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+
+  postgres:
+    image: postgres:18-alpine
+    ports:
+      - 5434:5432
+    volumes:
+      - postgres_data:/home/postgres/pgdata/data
+      - ./scripts/init-database.sql:/docker-entrypoint-initdb.d/init-database.sql:ro
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    restart: always
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 2s
+      retries: 5
+
+
+volumes:
+  postgres_data:
